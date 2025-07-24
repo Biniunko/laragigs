@@ -2,11 +2,21 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\listings;  //or use 'listings'=> App\Models\listings::all() at the route
 Route::get('/', function () {
-    return view('welcome');
+    return view('listings',[
+        'heading'=>'Latest Listings',
+        'listings'=>listings::all()
+    ]);
 });
-Route::get('/hello', function(){
+
+//single listing
+Route::get('/listings/{id}',function($id){
+    return view('listing', [
+       'listing'=> listings::find($id)
+    ]);
+});
+/*Route::get('/hello', function(){
     return response("<h1>hello</h1>");
 });
 
@@ -18,4 +28,4 @@ Route::get('/posts/{id}',function($id){
 
 Route::get('/search',function(Request $request){
     return $request->name.' '.$request->city;
-});
+});*/
