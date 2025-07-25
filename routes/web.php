@@ -1,22 +1,30 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\listings;  //or use 'listings'=> App\Models\listings::all() at the route
-Route::get('/', function () {
-    return view('listings',[
-        'heading'=>'Latest Listings',
-        'listings'=>Listing::all()
-    ]);
-});
+Route::get('/',[ListingController::class,'index'] );
+
+
+//show create form
+Route::get('/listings/create', [ListingController::class,'create']);
+
+//this store listing gigs
+Route::post('/listings',[ListingController::class, 'store']);
+
 
 //single listing
-Route::get('/listings/{id}',function($id){
-    return view('listing', [
-       'listing'=> Listing::find($id)
-    ]);
-});
+Route::get('/listings/{listing}',[ListingController::class, 'show']);
+
+
+
+
+
+
+
+
 /*Route::get('/hello', function(){
     return response("<h1>hello</h1>");
 });
