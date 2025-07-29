@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('logo')->nullable(); // Assuming you want to store a logo
             $table->string('tags');
             $table->string('company');
             $table->string('location');

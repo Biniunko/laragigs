@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ListingController;
-use App\Models\Listing;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\listings;  //or use 'listings'=> App\Models\listings::all() at the route
@@ -13,17 +13,22 @@ Route::get('/listings/create', [ListingController::class,'create']);
 
 //this store listing gigs
 Route::post('/listings',[ListingController::class, 'store']);
-
-
+//show edit form
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+// update form
+Route::put('/listings/{listing}', [ListingController::class, 'update']);
+// delete form
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
 //single listing
 Route::get('/listings/{listing}',[ListingController::class, 'show']);
-
-
-
-
-
-
-
+//show register create form
+Route::get('/register', [UserController::class,'create']);
+//create new users
+Route::post('/users', [UserController::class, 'store']);
+//show login form
+Route::get('/login', [UserController::class, 'login']);
+//log user out
+Route::get('/logout', [UserController::class, 'logout']);
 
 /*Route::get('/hello', function(){
     return response("<h1>hello</h1>");

@@ -14,7 +14,9 @@ class Listing extends Model
     'location',
     'email',
     'website',
-    'description',];//or go to AppServiceProvider.php and add Model::unguard() to allow mass assignment for all fields
+    'description',
+    'logo',
+    ];//or go to AppServiceProvider.php and add Model::unguard() to allow mass assignment for all fields
     
     use HasFactory;
     public function scopeFilter($query, array $filters){
