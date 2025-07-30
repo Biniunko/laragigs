@@ -14,15 +14,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
-        Listing::factory(6)->create(); //this line created for custom factory useing faker
+    
+        //User::factory(5)->create();
+        $user = User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@email.com'
+        ]);
+            Listing::factory(6)->create([
+            'user_id' => $user->id,
+        ]);
+
+        //Listing::factory(6)->create(); //this line created for custom factory useing faker
         /*User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);*/
         //ketache yalew single line code 10 user seed yemiyareg nw
         //User::factory(10)->create();
-        Listing::create([
+        /*Listing::create([
             'title'=>'laravel senior developer',
             'tags'=>'laravel, Javascript',
             'company'=>'Acme Corp',
@@ -39,6 +48,6 @@ class DatabaseSeeder extends Seeder
             'email'=>'email2@email.com',
             'website'=>'https://kuraztech.com',
             'description'=>'We are looking for a full-stack developer with expertise in Laravel and API development',
-        ]);
+        ]);*/
     }
 }

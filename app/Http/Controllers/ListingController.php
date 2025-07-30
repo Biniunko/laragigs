@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -28,6 +29,7 @@ class ListingController extends Controller
     }
     //this store listing gigs
     public function store(Request $request){
+    
         //validate form
         //use Rule::unique to validate unique company name
        $formFields = $request->validate([
@@ -43,6 +45,8 @@ class ListingController extends Controller
            if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
            }
+           $formFields['user_id'] = Auth::check() ? Auth::id() : null;
+           // $formFields['user_id'] = auth()->id(); 
            Listing::create($formFields);
         Session::flash('message', 'Listing created successfully');
 
@@ -71,6 +75,7 @@ public function update(Request $request,Listing $listing){
            if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
            }
+           // Ensure the user_id is set to the authenticated user
         $listing->update($formFields);
         Session::flash('message', 'Listing updated successfully');
 
