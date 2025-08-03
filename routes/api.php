@@ -3,7 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/posts',function() {
+
+
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+/*Route::get('/posts',function() {
     // Your logic to handle posts
     return response()->json([
        'posts'=>[
@@ -14,3 +20,4 @@ Route::get('/posts',function() {
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+*/
